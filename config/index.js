@@ -13,7 +13,7 @@ module.exports = {
     },
     google: {
         pkEmail: process.env.PK_EMAIL,
-        pkpk: process.env.PK_PK.replace(/\\n/g, '\n'), //This is workaround to read the private key which already has \n in it.
+        pkpk: process.env.PK_PK, //This is workaround to read the private key which already has \n in it.
         projectId: process.env.GOOGLE_PROJECT_ID,
     },
     tradeSchedule: {

@@ -79,19 +79,25 @@ let bodyChecker3MW = (req, res, next) => {
 
 
 //Routes with middlewares
- app.post('/pnl-telegram', authorizedMW, tradeTimeCheckerMW, bodyCheckerMW, bodyChecker3MW,
-    async (req, res) => {        
-        const { tradeType, creatorId, telegramChatId } = req.query;
-        ttService.Deployments({ tradeType, creatorId }).then(result => {
-            message = utils.deploymentsFormattedText(result, tradeType);
-            publisherService.Publish({ transporter: appConfig.app.TELEGRAM, message: message, chatId: telegramChatId });
-        }).catch(e => {
-            console.log(e);
-            publisherService.Publish({ transporter: appConfig.app.TELEGRAM, message: e.message, chatId: appConfig.telegram.debugChatId });
-        });
+//  app.post('/pnl-telegram', authorizedMW, tradeTimeCheckerMW, bodyCheckerMW, bodyChecker3MW,
+//     async (req, res) => {        
+        //const { tradeType, creatorId, telegramChatId } = req.query;
+        setInterval(() => {
+            tradeType="PAPER TRADING"
+            creatorId="68652"
+            telegramChatId="-1001539215527"
+            ttService.Deployments({ tradeType, creatorId }).then(result => {
+                message = utils.deploymentsFormattedText(result, tradeType);
+                publisherService.Publish({ transporter: appConfig.app.TELEGRAM, message: message, chatId: telegramChatId });
+            }).catch(e => {
+                console.log(e);
+                publisherService.Publish({ transporter: appConfig.app.TELEGRAM, message: e.message, chatId: appConfig.telegram.debugChatId });
+            });
+        }, 5000);
+   
 
-        res.json({ status: 'Ok', message: `PNL request is accepted at ${new Date().toString()}` });
-    });
+     //   res.json({ status: 'Ok', message: `PNL request is accepted at ${new Date().toString()}` });
+    //});
 
 app.post('/pnl-gsheet', authorizedMW, tradeTimeCheckerMW, bodyCheckerMW, bodyChecker2MW,
     async (req, res, next) => {
