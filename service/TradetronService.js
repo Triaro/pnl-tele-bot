@@ -28,7 +28,8 @@ async function Deployments(tradeOptions, page=1) {
         //Simplify the deployment json as Deployment Objects Array       
         //console.log("tron resp: ",  await res.json()); 
         let deployments = await res.json();
-  
+        if(page==1)
+            deploymentsArray = [];
         deployments.data.forEach(element => {
             deploymentsArray.push(
                 new Deployment(element.deployment_type, 
