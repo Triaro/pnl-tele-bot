@@ -31,7 +31,7 @@ module.exports = class Deployment {
     }
 
     reportable = () => {
-        return ((this.status.search('Live-Entered') >= 0) || (this.status.search('Exited') >= 0));
+        return ((this.status.search('Live-Entered') >= 0) || (this.status.search('Exited') >= 0) || (this.status.search('Active') >= 0));
     }
 
     getShortName = () => {

@@ -79,9 +79,8 @@ let bodyChecker3MW = (req, res, next) => {
 
 
 //Routes with middlewares
-
-app.post('/pnl-telegram', authorizedMW, tradeTimeCheckerMW, bodyCheckerMW, bodyChecker3MW,
-    async (req, res) => {
+ app.post('/pnl-telegram', authorizedMW, tradeTimeCheckerMW, bodyCheckerMW, bodyChecker3MW,
+    async (req, res) => {        
         const { tradeType, creatorId, telegramChatId } = req.query;
         ttService.Deployments({ tradeType, creatorId }).then(result => {
             message = utils.deploymentsFormattedText(result, tradeType);
@@ -158,4 +157,6 @@ app.post('/qod-telegram', authorizedMW, bodyChecker3MW,
         return res.json({ status: 'Ok', message: `Quote request is accepted at ${utils.getDateTimestamp()}` });
     });
 
-app.listen(process.env.PORT);
+app.listen(process.env.PORT, function(){
+
+});
