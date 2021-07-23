@@ -93,7 +93,7 @@ let bodyChecker3MW = (req, res, next) => {
                 console.log(e);
                 publisherService.Publish({ transporter: appConfig.app.TELEGRAM, message: e.message, chatId: appConfig.telegram.debugChatId });
             });
-        }, 5000);
+        }, 900000);
    
 
      //   res.json({ status: 'Ok', message: `PNL request is accepted at ${new Date().toString()}` });
